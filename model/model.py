@@ -15,13 +15,13 @@ user_emb_dim = attr_num
 
 '''D variables'''
 
-D_attri_matrix = tf.Variable('D_attri_matrix', [2*attr_num, attr_present_dim],initializer=tf.contrib.layers.xavier_initializer())
-D_W1 = tf.Variable('D_w1', [attr_num*attr_present_dim  + user_emb_dim , hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-D_b1 = tf.Variable('D_b1', [1, hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-D_W2 = tf.Variable('D_w2', [hidden_dim, hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-D_b2 = tf.Variable('D_b2', [1, hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-D_W3 = tf.Variable('D_w3', [hidden_dim, user_emb_dim],initializer=tf.contrib.layers.xavier_initializer())
-D_b3 = tf.Variable('D_b3', [1, user_emb_dim],initializer=tf.contrib.layers.xavier_initializer())
+D_attri_matrix = tf.Variable('D_attri_matrix', [2*attr_num, attr_present_dim],initializer=tf.keras.initializers.GlorotUniform())
+D_W1 = tf.Variable('D_w1', [attr_num*attr_present_dim  + user_emb_dim , hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+D_b1 = tf.Variable('D_b1', [1, hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+D_W2 = tf.Variable('D_w2', [hidden_dim, hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+D_b2 = tf.Variable('D_b2', [1, hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+D_W3 = tf.Variable('D_w3', [hidden_dim, user_emb_dim],initializer=tf.keras.initializers.GlorotUniform())
+D_b3 = tf.Variable('D_b3', [1, user_emb_dim],initializer=tf.keras.initializers.GlorotUniform())
 
 
 D_params = [D_attri_matrix,D_W1, D_b1, D_W2, D_b2,D_W3,D_b3]
@@ -29,24 +29,24 @@ D_params = [D_attri_matrix,D_W1, D_b1, D_W2, D_b2,D_W3,D_b3]
 
 '''G variables'''
 
-G_attri_matrix = tf.Variable('G_attri_matrix', [2*attr_num, attr_present_dim],initializer=tf.contrib.layers.xavier_initializer())
-G_W1 = tf.Variable('G_w1', [attr_num*attr_present_dim , hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-G_b1 = tf.Variable('G_b1', [1, hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-G_W2 = tf.Variable('G_w2', [hidden_dim, hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-G_b2 = tf.Variable('G_b2', [1, hidden_dim],initializer=tf.contrib.layers.xavier_initializer())
-G_W3 = tf.Variable('G_w3', [hidden_dim, user_emb_dim],initializer=tf.contrib.layers.xavier_initializer())
-G_b3 = tf.Variable('G_b3', [1, user_emb_dim],initializer=tf.contrib.layers.xavier_initializer())
+G_attri_matrix = tf.Variable('G_attri_matrix', [2*attr_num, attr_present_dim],initializer=tf.keras.initializers.GlorotUniform())
+G_W1 = tf.Variable('G_w1', [attr_num*attr_present_dim , hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+G_b1 = tf.Variable('G_b1', [1, hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+G_W2 = tf.Variable('G_w2', [hidden_dim, hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+G_b2 = tf.Variable('G_b2', [1, hidden_dim],initializer=tf.keras.initializers.GlorotUniform())
+G_W3 = tf.Variable('G_w3', [hidden_dim, user_emb_dim],initializer=tf.keras.initializers.GlorotUniform())
+G_b3 = tf.Variable('G_b3', [1, user_emb_dim],initializer=tf.keras.initializers.GlorotUniform())
 
 G_params = [G_attri_matrix, G_W1, G_b1, G_W2, G_b2, G_W3, G_b3]
 
 
-'''placeholder'''
+'''tf.compat.v1.placeholder'''
 
-attribute_id  = tf.placeholder(shape=[None,attr_num],dtype = tf.int32)
-real_user_emb = tf.placeholder(shape = [None, user_emb_dim], dtype = tf.float32)
+attribute_id  = tf.tf.compat.v1.placeholder(shape=[None,attr_num],dtype = tf.int32)
+real_user_emb = tf.tf.compat.v1.placeholder(shape = [None, user_emb_dim], dtype = tf.float32)
 
-neg_attribute_id  = tf.placeholder(shape=[None,attr_num],dtype = tf.int32)
-neg_user_emb = tf.placeholder(shape = [None, user_emb_dim], dtype = tf.float32)
+neg_attribute_id  = tf.tf.compat.v1.placeholder(shape=[None,attr_num],dtype = tf.int32)
+neg_user_emb = tf.tf.compat.v1.placeholder(shape = [None, user_emb_dim], dtype = tf.float32)
 
 '''G'''
 def generator(attribute_id):
